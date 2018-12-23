@@ -13,11 +13,14 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app">
-          <Nav/>
           <Route render={({ location }) => {
             const { pathname, key } = location;
 
             return (
+              <div>
+                <Nav
+                  pathname={pathname}
+                />
               <TransitionGroup component={null}>
                 <Transition
                   key={key}
@@ -26,6 +29,8 @@ class App extends Component {
                   onExit={(node, appears) => exit(node, appears)}
                   timeout={{enter: 750, exit: 150}}
                 >
+
+
                   <Switch location={location}>
                     <Route exact path="/" component={Home}/>
                     <Route path="/author" component={Author} />
@@ -33,6 +38,7 @@ class App extends Component {
                   </Switch>
                 </Transition>
               </TransitionGroup>
+          </div>
             )
           }}/>
         </div>
@@ -40,5 +46,5 @@ class App extends Component {
     )
   }
 }
-  
+
   export default App;
